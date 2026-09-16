@@ -1,0 +1,8 @@
+Este script quedo desactualizado: crea una base de datos distinta (sgb_bd)
+con un esquema simplificado (columna "clave", sin "apellido") que ya NO
+coincide con el esquema real que usa el codigo Java (Usuario.java,
+UsuarioDAO.java), el cual esta alineado con sgb.sql (base de datos "sgb",
+10 tablas, columna "contrasena_hash", con "apellido").
+
+Se conserva aqui solo como referencia historica. Para correr el proyecto
+usa unicamente sgb.sql (raiz del proyecto).

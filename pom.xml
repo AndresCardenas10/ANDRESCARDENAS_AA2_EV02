@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.sgb</groupId>
+    <artifactId>citas-sgb</artifactId>
+    <version>1.0.0</version>
+    <!-- Cambia de "jar" (aplicacion de consola, EV01) a "war" (aplicacion
+         web, EV02): un WAR es el formato de empaquetado que usa Tomcat
+         para desplegar aplicaciones web Java. -->
+    <packaging>war</packaging>
+
+    <name>SGB - Modulo Citas (Web)</name>
+    <description>
+        Evidencia GA7-220501096-AA2-EV02 - Modulos de software codificados
+        y probados. Modulo web (Servlets + JSP) de login y CRUD de citas
+        del proyecto Sistema Gestion Barberia (SGB). Ejercicio tecnico de
+        la actividad GA7-AA2, independiente de la decision de stack
+        (JavaScript/Node.js) tomada para el backend definitivo del
+        proyecto formativo.
+    </description>
+
+    <properties>
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <failOnMissingWebXml>false</failOnMissingWebXml>
+    </properties>
+
+    <dependencies>
+        <!-- Conector JDBC oficial de MySQL (igual que en EV01). -->
+        <dependency>
+            <groupId>com.mysql</groupId>
+            <artifactId>mysql-connector-j</artifactId>
+            <version>8.4.0</version>
+        </dependency>
+
+        <!-- API de Servlets (Jakarta EE 10 / Tomcat 10.1.x). Scope
+             "provided" porque el propio Tomcat ya trae esta libreria en
+             tiempo de ejecucion; solo la necesitamos para compilar. -->
+        <dependency>
+            <groupId>jakarta.servlet</groupId>
+            <artifactId>jakarta.servlet-api</artifactId>
+            <version>6.0.0</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <!-- API de JSP (Jakarta EE 10 / Tomcat 10.1.x). Tambien
+             "provided" por la misma razon que la de Servlets. -->
+        <dependency>
+            <groupId>jakarta.servlet.jsp</groupId>
+            <artifactId>jakarta.servlet.jsp-api</artifactId>
+            <version>3.1.1</version>
+            <scope>provided</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <finalName>citas-sgb</finalName>
+        <plugins>
+            <!-- maven-war-plugin: empaqueta src/main/webapp + las clases
+                 compiladas en el .war que Tomcat despliega. failOnMissingWebXml
+                 en false porque usamos anotaciones (@WebServlet) en vez de
+                 declarar los servlets en un web.xml. -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>3.4.0</version>
+                <configuration>
+                    <failOnMissingWebXml>false</failOnMissingWebXml>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>
